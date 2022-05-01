@@ -19,7 +19,6 @@ $(function () {
 
 	var url = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
 	var token = '722f97d320f6b6271757ee22f84394b046f739b5';
-	var query = 'москва';
 
 	var options = {
 		headers: {
@@ -28,6 +27,12 @@ $(function () {
 			Authorization: 'Token ' + token,
 		},
 	};
+
+	initWeather({
+		text: 'Москва',
+		lat: 55.7483,
+		lon: 37.6171,
+	});
 
 	function getTime(unixTime) {
 		// Create a new JavaScript Date object based on the timestamp
@@ -94,35 +99,38 @@ $(function () {
 		})
 		.on('select2:select', function (e) {
 			let data = e.params.data;
-
-			$('#weather-city').text(data.text);
-
-			axios
-				.get('https://api.openweathermap.org/data/2.5/weather', {
-					params: {
-						lat: data.lat,
-						lon: data.lon,
-						appid: '2f314e0a2465820a76202a9ed015f4de',
-						units: 'metric',
-					},
-				})
-				.then(function (response) {
-					// обработка успешного запроса
-					let data = response.data;
-					$('#weather-img').attr('src', `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
-					console.log(data);
-					$('#weather-name').text(wetherNames.get(data.weather[0].main));
-					$('#weather-temp').text(data.main.temp);
-					$('#weather-wind').text(data.wind.speed);
-					$('#weather-time').text(getTime(data.dt));
-					$('#weather-water').text(data.main.humidity);
-				})
-				.catch(function (error) {
-					// обработка ошибки
-					console.log(error);
-				})
-				.then(function () {
-					// выполняется всегда
-				});
+			initWeather(data);
 		});
+
+	function initWeather(geo) {
+		$('#weather-city').text(geo.text);
+
+		axios
+			.get('https://api.openweathermap.org/data/2.5/weather', {
+				params: {
+					lat: geo.lat,
+					lon: geo.lon,
+					appid: '2f314e0a2465820a76202a9ed015f4de',
+					units: 'metric',
+				},
+			})
+			.then(function (response) {
+				// обработка успешного запроса
+				let data = response.data;
+				$('#weather-img').attr('src', `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`);
+				console.log(data);
+				$('#weather-name').text(wetherNames.get(data.weather[0].main));
+				$('#weather-temp').text(data.main.temp);
+				$('#weather-wind').text(data.wind.speed);
+				$('#weather-time').text(getTime(data.dt));
+				$('#weather-water').text(data.main.humidity);
+			})
+			.catch(function (error) {
+				// обработка ошибки
+				console.log(error);
+			})
+			.then(function () {
+				// выполняется всегда
+			});
+	}
 });
