@@ -29,6 +29,8 @@
 			referrerpolicy="no-referrer"
 		/>
 
+		<link rel="stylesheet" href="/css/Currency.css" />
+
 		<script src="/libs/mdb/mdb.min.js"></script>
 
 		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -49,47 +51,61 @@
 		<script src="./js/Currency.js"></script>
 	</head>
 	<body>
-		<div class="container">
-			<div class="card mt-3">
-				<h5 class="card-header">Погода</h5>
-				<div class="card-body">
-					<div class="mb-3">
-						<label for="exampleFormControlInput1" class="form-label">Введите адрес</label>
-						<select id="select-address" class="form-select" aria-label="Default select example"></select>
-					</div>
-					<div class="row d-flex justify-content-center align-items-center">
-						<div class="col-md-8 col-lg-6 col-xl-4">
-							<div class="card" style="color: #4b515d; border-radius: 35px">
-								<div class="card-body p-4">
-									<div class="d-flex">
-										<h6 id="weather-city" class="flex-grow-1">Адресс</h6>
-										<h6 id="weather-time">Время</h6>
-									</div>
-
-									<div class="d-flex flex-column text-center mt-5 mb-4">
-										<h6 class="display-4 mb-0 font-weight-bold" style="color: #1c2331">
-											<span id="weather-temp">Темп.</span>°C
-										</h6>
-										<span id="weather-name" class="small" style="color: #868b94">Погода</span>
-									</div>
-
-									<div class="d-flex align-items-center">
-										<div class="flex-grow-1" style="font-size: 1rem">
-											<div>
-												<i class="fas fa-wind fa-fw" style="color: #868b94"></i>
-												<span class="ms-1"> <span id="weather-wind">Ветер</span> м/с </span>
+		<div class="container pt-5">
+			<div class="row">
+				<div class="col-6">
+					<div class="card mt-3">
+						<h5 class="card-header">Погода</h5>
+						<div class="card-body">
+							<div class="mb-3">
+								<label for="exampleFormControlInput1" class="form-label">Введите адрес</label>
+								<select
+									id="select-address"
+									class="form-select"
+									aria-label="Default select example"
+								></select>
+							</div>
+							<div class="row">
+								<div class="col">
+									<div class="card" style="color: #4b515d; border-radius: 35px">
+										<div class="card-body p-4">
+											<div class="d-flex">
+												<h6 id="weather-city" class="flex-grow-1">Адресс</h6>
+												<h6 id="weather-time">Время</h6>
 											</div>
-											<div>
-												<i class="fas fa-tint fa-fw" style="color: #868b94"></i>
-												<span class="ms-1"> <span id="weather-water">Влажность</span> % </span>
+
+											<div class="d-flex flex-column text-center mt-5 mb-4">
+												<h6 class="display-4 mb-0 font-weight-bold" style="color: #1c2331">
+													<span id="weather-temp">Темп.</span>°C
+												</h6>
+												<span id="weather-name" class="small" style="color: #868b94"
+													>Погода</span
+												>
 											</div>
-										</div>
-										<div>
-											<img
-												id="weather-img"
-												src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
-												width="100px"
-											/>
+
+											<div class="d-flex align-items-center">
+												<div class="flex-grow-1" style="font-size: 1rem">
+													<div>
+														<i class="fas fa-wind fa-fw" style="color: #868b94"></i>
+														<span class="ms-1">
+															<span id="weather-wind">Ветер</span> м/с
+														</span>
+													</div>
+													<div>
+														<i class="fas fa-tint fa-fw" style="color: #868b94"></i>
+														<span class="ms-1">
+															<span id="weather-water">Влажность</span> %
+														</span>
+													</div>
+												</div>
+												<div>
+													<img
+														id="weather-img"
+														src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu1.webp"
+														width="100px"
+													/>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -97,27 +113,82 @@
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="card mt-3">
-				<h5 class="card-header">Валюты</h5>
-				<div class="card-body">
-					<div class="row">
-						<h5 class="card-title">Актуальный курс валют</h5>
-						<div class="col-4">
-							<div class="card">
-								<div class="card-body d-flex justify-content-between align-items-center">
-									<div class="d-flex flex-column justify-content-between align-items-center">
-										<div>$ <span id="dailyDollar">70</span></div>
-										<div class="inc">1.2</div>
+				<div class="col-6">
+					<div class="card mt-3">
+						<h5 class="card-header">Валюты</h5>
+						<div class="card-body">
+							<div class="row">
+								<h5 class="card-title">Актуальный курс валют</h5>
+								<div class="col">
+									<div class="card">
+										<div class="card-body d-flex justify-content-between align-items-center">
+											<div class="d-flex flex-column justify-content-between align-items-center">
+												<div>$ <span id="dailyDollar">-</span></div>
+												<div class="difference">-</div>
+											</div>
+											<div class="d-flex flex-column justify-content-between align-items-center">
+												<div>€ <span id="dailyEuro">-</span></div>
+												<div class="difference">-</div>
+											</div>
+											<div class="d-flex flex-column justify-content-between align-items-center">
+												<div>¥ <span id="dailyYuan">-</span></div>
+												<div class="difference">-</div>
+											</div>
+										</div>
 									</div>
-									<div class="d-flex flex-column justify-content-between align-items-center">
-										<div>$ <span id="dailyDollar">70</span></div>
-										<div class="inc">1.2</div>
-									</div>
-									<div class="d-flex flex-column justify-content-between align-items-center">
-										<div>$ <span id="dailyDollar">70</span></div>
-										<div class="inc">1.2</div>
+								</div>
+							</div>
+
+							<div class="row mt-3">
+								<h5 class="card-title">Конвертер валют</h5>
+								<div class="col">
+									<div class="card">
+										<div class="card-body" style="min-height: 236px">
+											<div class="mb-3">
+												<input
+													type="number"
+													class="form-control"
+													id="convert-sum"
+													placeholder="Введите сумму"
+												/>
+											</div>
+
+											<div class="row">
+												<div class="col-6">
+													<select
+														id="select-from"
+														class="form-select"
+														aria-label="Default select example"
+													></select>
+												</div>
+
+												<div class="col-6">
+													<select
+														id="select-to"
+														class="form-select"
+														aria-label="Default select example"
+													></select>
+												</div>
+											</div>
+
+											<div class="row mt-3">
+												<div class="col">
+													<button id="btn-result" class="btn btn-primary w-100">
+														Посчитать
+													</button>
+												</div>
+											</div>
+
+											<div
+												id="convert-result"
+												class="alert d-none mt-3"
+												role="alert"
+												style="margin-bottom: 0; padding-bottom: 6px; padding-top: 6px"
+											>
+												Тут отобразиться результат
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
