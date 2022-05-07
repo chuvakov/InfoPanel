@@ -52,7 +52,7 @@ $(function () {
 	let addressSelect = $('#select-address')
 		.select2({
 			width: '100%',
-			placeholder: 'Введите адресс',
+			placeholder: 'Адресс',
 			allowClear: true,
 			ajax: {
 				transport: (data, success, failure) => {
